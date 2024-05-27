@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Search and Grouping</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .player-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 8px;
+      text-align: center;
+    }
+    .player-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <!-- Section 1: Search -->
+    <section id="section-1">
+      <input type="text" id="search-input" class="form-control" placeholder="Search for players...">
+      <button id="search-btn" class="btn btn-primary mt-2">Search</button>
+    </section>
+
+    <!-- Section 2: Player Cards -->
+    <section id="section-2" class="mt-5">
+      <div id="player-cards" class="row"></div>
+    </section>
+
+    <!-- Section 3: Grouped Players -->
+    <section id="section-3" class="mt-5">
+      <h3>Grouped Players</h3>
+      <div id="grouped-players">
+        <ul id="grouped-players-list"></ul>
+        <p id="player-count">Player Count: 0</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="playerModal" tabindex="-1" aria-labelledby="playerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="playerModalLabel">Player Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <!-- Player details will be inserted here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultApiUrl = 'https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=A';
+    const searchApiUrl = 'https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=';
+    const lookupApiUrl = 'https://www.thesportsdb.com/api/v1/json/3/lookupplayer.php?id=';
+    const playerCardsContainer = document.getElementById('player-cards');
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('search-input');
+    const groupedPlayersList = document.getElementById('grouped-players-list');
+    const playerCountDisplay = document.getElementById('player-count');
+    const maxGroupSize = 11;
+    let playerCount = 0;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchPlayers(defaultApiUrl);
+    });
+
+    searchBtn.addEventListener('click', () => {
+      const query = searchInput.value.trim();
+      if (query) {
+        fetchPlayers(searchApiUrl + query);
+      }
+    });
+
+    function fetchPlayers(url) {
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          playerCardsContainer.innerHTML = '';
+          if (data.player) {
+            data.player.forEach(player => createPlayerCard(player));
+          }
+        })
+        .catch(error => console.error('Error fetching players:', error));
+    }
+
+    function createPlayerCard(player) {
+      const card = document.createElement('div');
+      card.className = 'col-12 col-sm-6 col-md-4 player-card';
+
+      const description = player.strDescriptionEN ? player.strDescriptionEN.split(' ').slice(0, 10).join(' ') + '...' : 'No description available';
+
+      card.innerHTML = `
+        <img src="${player.strThumb || 'https://via.placeholder.com/150'}" alt="${player.strPlayer}">
+        <h5>${player.strPlayer}</h5>
+        <p>${player.strNationality}</p>
+        <p>${player.strTeam || 'No team'}</p>
+        <p>${player.strSport}</p>
+        <p>${player.strWage || 'No salary info'}</p>
+        <p>${description}</p>
+        <p>
+          <a href="${player.strFacebook}" target="_blank" class="btn btn-outline-primary btn-sm">Facebook</a>
+          <a href="${player.strTwitter}" target="_blank" class="btn btn-outline-primary btn-sm">Twitter</a>
+        </p>
+        <button class="btn btn-info" onclick="showDetails(${player.idPlayer})">Details</button>
+        <button class="btn btn-success" onclick="addToGroup('${player.strPlayer}')">Add to group</button>
+      `;
+
+      playerCardsContainer.appendChild(card);
+    }
+
+    function showDetails(playerId) {
+      fetch(lookupApiUrl + playerId)
+        .then(response => response.json())
+        .then(data => {
+          const player = data.players[0];
+          document.getElementById('modal-body').innerHTML = `
+            <p>Name: ${player.strPlayer}</p>
+            <p>Nationality: ${player.strNationality}</p>
+            <p>Team: ${player.strTeam}</p>
+            <p>Sport: ${player.strSport}</p>
+            <p>Salary: ${player.strWage || 'No salary info'}</p>
+            <p>Description: ${player.strDescriptionEN ? player.strDescriptionEN.split(' ').slice(0, 10).join(' ') + '...' : 'No description available'}</p>
+          `;
+          new bootstrap.Modal(document.getElementById('playerModal')).show();
+        })
+        .catch(error => console.error('Error fetching player details:', error));
+    }
+
+    function addToGroup(playerName) {
+      if (playerCount >= maxGroupSize) {
+        alert('You cannot add more than 11 players to the group.');
+        return;
+      }
+
+      const listItem = document.createElement('li');
+      listItem.textContent = playerName;
+      groupedPlayersList.appendChild(listItem);
+
+      playerCount++;
+      playerCountDisplay.textContent = `Player Count: ${playerCount}`;
+    }
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

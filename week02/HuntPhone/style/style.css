@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.ds-ico {
+    width: 30px;
+    height: 30px;
+}
+
+.ds-ico:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.display-products {
+    border: 1px solid red;
+}
+
+.display-tags {
+    border: 1px solid green;
+}
+
+input {
+    outline: 1px solid blue;
+}

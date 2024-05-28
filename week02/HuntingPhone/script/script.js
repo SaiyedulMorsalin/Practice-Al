@@ -16,6 +16,7 @@ const search = async ()=>{
         const res = await fetch(url);
         const data = await res.json();
         console.log(data.data)
+        showMore(data.data)
         if(data == null){
             alert("Not FOUNd")
         }
@@ -32,7 +33,6 @@ const search = async ()=>{
 
 const addCardItem = (data)=>{
         const cardContainer = document.getElementById("card-container");
-        cardContainer.classList.add("border-none")
         for(phone of data){
             const cardItem = document.createElement("div");
             cardItem.classList.add("card-item","col-md-4","gap-3","mb-3");
@@ -50,8 +50,8 @@ const addCardItem = (data)=>{
         }
 }
 const showMore = (data) =>{
-    for(let i=0;i<9;i++){
-        addCardItem(data);
+    for(phone of data){
+        addCardItem(phone);
     }
 }
 const addToCart = ()=>{

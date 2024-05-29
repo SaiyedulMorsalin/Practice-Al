@@ -1,0 +1,34 @@
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
+.banner-content {
+    background-color: rgb(233, 245, 245);
+    border-radius: 15px;
+}
+
+.banner-img {
+    width: 50%;
+}
+
+.banner-txt {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    color: rgb(51, 51, 51);
+}
+
+.c {
+    margin-bottom: 10px;
+    /* border: 1px solid red; */
+}
+
+.cat-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#food-container {
+    padding: 50px;
+    background-color: rgb(233, 245, 245);
+    border-radius: 15px;
+}

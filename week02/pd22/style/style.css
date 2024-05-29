@@ -2,8 +2,29 @@
     font-family: "Open Sans", sans-serif;
 }
 
+.logo-img {
+    width: 60px;
+}
+
+
+.navbar a {
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+
+}
+
+.navbar {
+    background-color: #ffffff !;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+#banner {
+    background-color: #f0ecec !important;
+}
+
 .banner-content {
-    background-color: rgb(233, 245, 245);
+    /* background-color: #f0ecec !important; */
     border-radius: 15px;
 }
 
@@ -22,7 +43,7 @@
     /* border: 1px solid red; */
 }
 
-.cat-link {
+.meal-link {
     text-decoration: none;
     cursor: pointer;
 }
@@ -31,4 +52,18 @@
     padding: 50px;
     background-color: rgb(233, 245, 245);
     border-radius: 15px;
+}
+
+.intgredient {
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    color: rgb(51, 51, 51);
+}
+
+.list-container {
+    list-style: none;
+}
+
+.list-container li>i {
+    color: rgb(255, 7, 152);
 }

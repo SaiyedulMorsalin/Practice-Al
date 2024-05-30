@@ -1,0 +1,52 @@
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.banner {
+    background-color: rgb(243, 243, 237);
+}
+
+.banner-content {
+    padding: 15px;
+}
+
+.logo-img {
+    width: 180px;
+
+}
+
+.highlight {
+    font-weight: 600;
+}
+
+.bann-img {
+    width: 100%;
+
+}
+
+.navbar-nav a {
+    font-size: 18px;
+    font-weight: 600;
+    gap: 20px;
+}
+
+
+
+#default-data {
+    position: relative;
+}
+
+.data-row {
+    border: 1px solid gray;
+}
+
+
+
+.side {
+    margin: 0 auto;
+    
+}
+
+.p-cont {
+    position: relative;
+}

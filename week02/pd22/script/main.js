@@ -59,7 +59,7 @@ const displayCategories = (meals)=>{
 
 
 const showPage = async (mealId,mealName) =>{
-    console.log(typeof mealId,mealId)
+    // console.log(typeof mealId,mealId)
     const res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
     const data = await res.json();
     const meal = data.meals;

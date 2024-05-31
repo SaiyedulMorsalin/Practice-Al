@@ -3,7 +3,6 @@ const searchBtn = document.getElementById("search-btn");
 let isDefault = true;
 const playerCount = document.getElementById("player-cnt");
 let cnt = 0;
-const modalContainer = document.getElementById("moadal-container");
 
 searchBtn.addEventListener('click', () => {
     const searchValue = document.getElementById("search-value").value;
@@ -76,6 +75,7 @@ const addPlayer = (playerName, playerTeam, playerSport, button) => {
             <h6>Sport: ${playerSport}</h6>
         `;
         button.innerText = "Added";
+        button.style.color = "black"
         button.disabled = true;
 
         accordionContainer.appendChild(playerAddName);
@@ -89,15 +89,29 @@ const viewDetails = async (pId,pName)=>{
     const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupplayer.php?id=${pId}`);
     let data = await res.json();
     const player = data.players[0];
+    // showModalDetails(player)
+    showPhoneDetails(player)
     
-    modalContainer.style.display = "block";
-    const modalItem = document.createElement("div");
-    modalItem.innerHTML += `
-        <h2>${pName}</h2>
-        
+}
 
-    `
+const showPhoneDetails = (player) => {
     console.log(player);
-    console.log(pId,pName)
-    modalContainer.appendChild(modalItem);
+    const pName = document.getElementById('show-detail-name');
+    pName.innerText = player.strPlayer ? player.strPlayer : "No Name Found";
+    const pDescription = player.strDescriptionEN ? player.strDescriptionEN.slice(0, 250) : "No Data Found";
+    const pNationality = player.strNationality ? player.strNationality : "No Data Found";
+    const pTeam = player.strTeam ? player.strTeam : "No Data Found";
+    const pSport = player.strSport ? player.strSport : "No Data Found";
+    const pImage = player.strThumb ? player.strThumb : "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg";
+    const showDetailContainer = document.getElementById('show-detail-container');
+
+    showDetailContainer.innerHTML = `
+        <img src="${pImage}" alt="" />
+        <h6 class="mt-2">Nationality: ${pNationality}</h6>
+        <h6>Team: ${pTeam}</h6>
+        <h6>Sport: ${pSport}</h6>
+        <h6>Salary: ${player.strWage ? player.strWage : "No Data Found"}</h6>
+        <p class="card-text py-2">${pDescription}</p>
+    `
+    show_details_modal.showModal();
 }

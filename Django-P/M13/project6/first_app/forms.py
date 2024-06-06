@@ -1,5 +1,5 @@
 from django import forms
-
+from django.core import validators
 class ContactForm(forms.Form):
     name = forms.CharField(label='User Name',widget=forms.TextInput(attrs={'placeholder':"Enter Your Name"}),error_messages={'required':"Full Name"},help_text='at least 10 characters needed',required=True)
     email = forms.EmailField(label='User Email')
@@ -13,4 +13,8 @@ class ContactForm(forms.Form):
     # files = forms.FileField(label='Upload File',error_messages={'required':"Please upload a file"})
     text = forms.CharField(widget=forms.Textarea(attrs={'class':'bg-warning text-black','placeholder':'Enter you feedback'}))
     
+
+class StudentData(forms.Form):
+    name = forms.CharField(label='User Name',widget=forms.TextInput(attrs={'placeholder':"Enter Your Name"}),error_messages={'required':"Full Name"},help_text='at least 10 characters needed')
+    email = forms.EmailField(label='User Email')
     

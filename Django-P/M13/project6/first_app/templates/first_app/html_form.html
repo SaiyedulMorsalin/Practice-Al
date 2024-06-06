@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  HTML Page
+{% endblock %}
+{% block main_content %}
+  <div class="container">
+    <h1 class="text-center">This is HTML Form</h1>
+  </div>
+  <div class="container">
+    <form class="w-50 mx-auto mt-4" method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="exampleInputName" class="form-label">User Name</label>
+        <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="user_name" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="exampleInputEmail" />
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+{% endblock %}

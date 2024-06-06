@@ -16,5 +16,5 @@ class ContactForm(forms.Form):
 
 class StudentData(forms.Form):
     name = forms.CharField(label='User Name',widget=forms.TextInput(attrs={'placeholder':"Enter Your Name"}),error_messages={'required':"Full Name"},help_text='at least 10 characters needed')
-    email = forms.EmailField(label='User Email')
+    email = forms.CharField(label='User Email',widget=forms.EmailInput(attrs={'placeholder':'Enter your Email'}))
     

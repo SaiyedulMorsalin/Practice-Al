@@ -22,9 +22,18 @@ def html_form(request):
 
 
 def django_form(request):
-    form = ContactForm(request.POST)
-    if form.is_valid():   
-        print(form.cleaned_data)
-        data = form.cleaned_data
-        return render(request,'./first_app/django_form.html',{'form':form,'data':data})
-    return render(request,'./first_app/django_form.html',{'form':form})
+    if request.method == 'POST':
+        form = ContactForm(request.POST,request.FILES)
+        print(request.FILES)
+        if form.is_valid():
+            # file = form.cleaned_data['file']
+            # file_path ='./first_app/upload/'+file.name 
+            # with open(file_path,'wb+')  as destination:
+            #     for chunk in file.chunks():
+            #         destination.write(chunk)
+            print(form.cleaned_data)
+            data = form.cleaned_data
+            return render(request,'./first_app/django_form.html',{'form':form,'data':data})
+    else:
+        form = ContactForm()
+        return render(request,'./first_app/django_form.html',{'form':form})

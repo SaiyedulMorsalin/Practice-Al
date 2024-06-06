@@ -26,7 +26,7 @@ def django_form(request):
         form = ContactForm(request.POST,request.FILES)
         print(request.FILES)
         if form.is_valid():
-            # file = form.cleaned_data['file']
+            # file = form.cleaned_data['files']
             # file_path ='./first_app/upload/'+file.name 
             # with open(file_path,'wb+')  as destination:
             #     for chunk in file.chunks():

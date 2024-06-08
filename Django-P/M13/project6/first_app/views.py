@@ -44,8 +44,11 @@ def student_data(request):
         form = StudentData(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
-            data = form.cleaned_data
-            return render(request,'./first_app/student_form.html',{'form':form,'data':data})
+        data = form.cleaned_data
+        return render(request,'./first_app/student_form.html',{'form':form,'data':data})
     else:
         form = StudentData()
         return render(request,'./first_app/student_form.html',{'form':form})
+
+def password_validtaion(request):
+    

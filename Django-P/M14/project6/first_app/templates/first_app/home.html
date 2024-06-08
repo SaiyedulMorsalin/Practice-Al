@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+  Page
+{% endblock %}
+{% block main_content %}
+  <h1 class="text-center">Home Data Page</h1>
+
+  {% if data %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Roll</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for st in data %}
+          <tr>
+            <th scope="row">{{ st.roll }}</th>
+            <td>{{ st.name }}</td>
+            <td>{{ st.address }}</td>
+            <td>
+              <a href="{% url 'delete_student' st.roll %}"><input class="btn btn-danger" type="submit" value="Delete" /></a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <h5>Data Not yet</h5>
+  {% endif %}
+{% endblock %}

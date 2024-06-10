@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block title %}
+  Author
+{% endblock %}
+{% block main_content %}
+  <h3 class="text-center">Add Profile Page</h3>
+  <form class="w-50 mx-auto" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Submit" />
+  </form>
+{% endblock %}

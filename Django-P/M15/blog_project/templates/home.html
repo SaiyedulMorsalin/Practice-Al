@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Home
+{% endblock %}
+{% block main_content %}
+  <h3 class="text-center mb-5 p-2">Home Page</h3>
+  <div class="container">
+    <div class="card-container d-flex flex-wrap justify-content-center px-3">
+      {% for post in data %}
+        <div class="card col-md-5 border border-primary mx-1 mt-2">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">Author: {{ post.author.name }}</h6>
+
+            <p class="card-text">{{ post.content }}</p>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              {% for cat in post.category.all %}
+                <button class="btn btn-sm btn-white border border-rounded m-2" disabled>{{ cat.name }}</button>
+              {% endfor %}
+            </h6>
+            <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+          </div>
+
+          <div class="card-footer text-body-secondary">2 days ago</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

@@ -22,7 +22,8 @@ urlpatterns = [
     path('', views.home_page,name="home_page"),
     path('author/',include('author.urls')),
     path('categories/',include('categories.urls')),
-    path('post/',include('post.urls'))
+    path('post/',include('post.urls')),
+    path('profiles/',include('profiles.urls')),
     
     
 ]

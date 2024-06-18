@@ -1,5 +1,6 @@
 from django import forms
 from django.core import validators
+from django.contrib import messages
 class ContactForm(forms.Form):
     name = forms.CharField(label='User Name',widget=forms.TextInput(attrs={'placeholder':"Enter Your Name"}),error_messages={'required':"Full Name"},help_text='at least 10 characters needed',required=True)
     email = forms.EmailField(label='User Email')
@@ -46,6 +47,8 @@ class Valid_P(forms.Form):
         val_name = self.cleaned_data['name']
         if val_con_pass != val_pass:
             raise forms.ValidationError("Password Doesn't Match!!")
+        else:
+            success = True
         
         
     

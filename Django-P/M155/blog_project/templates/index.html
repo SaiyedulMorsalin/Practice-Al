@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Home Page
+{% endblock %}
+{% block main_content %}
+  <h5 class="text-center">This is home page</h5>
+  <div class="container-fluid">
+    <div class="row d-flex flex-wrap justify-content-center">
+      {% for post in data %}
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="text-center">{{ post.author.name }}</p>
+              <p class="card-text">{{ post.content }}</p>
+
+              <p>
+                {% for cat in post.category.all %}
+                  <button>{{ cat.name }}</button>
+                {% endfor %}
+              </p>
+              <a class="btn btn-warning" href="{% url 'edit_post' post.id %}">Edit</a>
+              <a class="btn btn-danger" href="{% url 'delete_post' post.id %}">Delete</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

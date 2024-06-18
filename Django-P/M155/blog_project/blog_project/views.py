@@ -1,7 +1,9 @@
 from django.shortcuts import render
-
+from post.models import PostModel
 def home_page(request):
-    return render(request,'base.html')
+    data = PostModel.objects.all()
+    print(data)
+    return render(request,'index.html',{'data':data})
 
 
 

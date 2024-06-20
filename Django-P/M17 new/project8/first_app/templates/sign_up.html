@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Sign Up
+{% endblock %}
+{% block main_content %}
+  <h4 class="text-center">This is Sign Up Page</h4>
+  <form action="">
+    {% for fm in form %}
+      {{ fm.label_tag }}
+      {{ fm }}
+      {{ fm.errors|striptags }}
+    {% endfor %}
+
+    <input type="submit" value="Submit" />
+  </form>
+{% endblock %}

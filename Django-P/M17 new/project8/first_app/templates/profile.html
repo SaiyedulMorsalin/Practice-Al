@@ -5,4 +5,9 @@
 {% endblock %}
 {% block main_content %}
   <h4 class="text-center">This is Profile Page</h4>
+  <h5>Hello, {{ user }}</h5>
+
+  <p>
+    <a href="{% url 'pass_change' %}">Password Change</a>
+  </p>
 {% endblock %}

@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}
   Sign Up
 {% endblock %}
 {% block main_content %}
   <h4 class="text-center">This is Sign Up Page</h4>
-  <form action="">
+  <form action="" method="post" class="w-50 mx-auto">
+    <!-- {{form|crispy}} -->
+    {% csrf_token %}
     {% for fm in form %}
       {{ fm.label_tag }}
       {{ fm }}
       {{ fm.errors|striptags }}
     {% endfor %}
-
-    <input type="submit" value="Submit" />
+    <br />
+    <input class="btn btn-primary" type="submit" value="Submit" />
+    <small>Already have an accout <a href="{% url 'login_page' %}">Login</a></small>
   </form>
 {% endblock %}

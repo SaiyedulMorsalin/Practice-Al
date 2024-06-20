@@ -24,15 +24,21 @@
             </ul>
             <div class="d-flex">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'profile_page' %}">Profile</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'login_page' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'signup_page' %}">Sign Up</a>
-                </li>
+                {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="btn btn-outline-warning mx-2" aria-current="page" href="{% url 'profile_page' %}">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-outline-danger mx-2" aria-current="page" href="{% url 'logout_page' %}">Logout</a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="btn btn-outline-success mx-2" aria-current="page" href="{% url 'signup_page' %}">Sign Up</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-outline-info mx-2" aria-current="page" href="{% url 'login_page' %}">Login</a>
+                  </li>
+                {% endif %}
               </ul>
             </div>
           </div>

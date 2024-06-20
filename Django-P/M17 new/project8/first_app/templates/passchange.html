@@ -5,7 +5,7 @@
   Login
 {% endblock %}
 {% block main_content %}
-  <h4 class="text-center">This is Login Page</h4>
+  <h4 class="text-center">This is Password Changed Page</h4>
   <form action="" method="post" class="w-50 mx-auto">
     <!-- {{form|crispy}} -->
     {% csrf_token %}
@@ -19,7 +19,7 @@
     {% for fm in form %}
       {{ fm.label_tag }}
       {{ fm }}
-      {{ fm.errors|striptags }}
+      <p class="text-danger">{{ fm.errors|striptags }}</p>
     {% endfor %}
     <br />
     <input class="btn btn-warning" type="submit" value="Submit" />

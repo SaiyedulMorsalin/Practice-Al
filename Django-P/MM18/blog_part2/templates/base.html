@@ -25,13 +25,22 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'create_post' %}">Add Post</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'edit_user_profile' %}">Update Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'change_password' %}">Chanage Password</a>
+                </li>
               {% endif %}
             </ul>
             <div class="d-flex">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
                 {% if user.is_authenticated %}
                   <li>
-                    <a class="btn btn-outline-primary mx-5" href="{% url 'user_profile' %}">Profile</a>
+                    <a href="{% url 'user_profile' %}" class="nav-link active me-2">{{ user.first_name }} {{ user.last_name }}</a>
+                  </li>
+                  <li>
+                    <a class="me-5 rounded-circle" href="{% url 'user_profile' %}"><img src="https://cdn.iconscout.com/icon/free/png-256/free-user-circle-3605375-3005455.png" class="rounded-circle" alt="..." style="width: 50px; height: 50px;" /></a>
                   </li>
                   <li>
                     <a href="{% url 'user_logout' %}" class="btn btn-outline-danger me-5">Logout</a>

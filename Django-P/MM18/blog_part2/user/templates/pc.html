@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+  {{ type }} Page
+{% endblock %}
+{% block main_content %}
+  <h4 class="text-center">{{ type }} Page</h4>
+  <form action="" class="w-50 mx-auto" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Change" />
+  </form>
+{% endblock %}

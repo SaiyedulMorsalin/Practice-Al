@@ -9,11 +9,12 @@
   <form action="" class="w-50 mx-auto" method="post">
     {% csrf_token %}
     {{ form|crispy }}
-
-    {% if type == 'Profile' %}
-      <input class="btn btn-primary" type="submit" value="Change" />
+    {{ data }}
+    {% if type == 'Profile Edit' %}
+      <input class="btn btn-outline-primary" type="submit" value="Update" />
+      {% comment %} <a href="{% url 'change_password' %}"><input class="btn btn-outline-warning btn-sm ms-5" type="submit" value="Change Password" /></a> {% endcomment %}
     {% else %}
-      <input class="btn btn-primary" type="submit" value="Login" />
+      {% comment %} <input class="btn btn-primary" type="submit" value="Login" /> {% endcomment %}
     {% endif %}
   </form>
 {% endblock %}

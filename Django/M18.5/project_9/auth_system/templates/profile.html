@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home Page{% endblock title %}
+{% block main_content %}
+{% if messages%} 
+      <div class="alert alert-success w-25 mx-auto" role="alert">
+        {% for m in messages  %}
+        <h4 class='text-center'>{{m}}</h4>
+        {% endfor %}
+      </div>
+      
+{% endif %} 
+<h4 class="text-center">This is Profile Page</h4>
+
+{% endblock main_content %}

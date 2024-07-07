@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Home Page
+{% endblock %}
+{% block main_content %}
+  <h4 class="text-center">This is Home Page</h4>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <h5>All Categories Here</h5>
+      </div>
+      <div class="col-9 mt-5">
+        <h4>All Search Results 0</h4>
+        <div class="mt-5 d-flex">
+          <div class="card mx-2" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

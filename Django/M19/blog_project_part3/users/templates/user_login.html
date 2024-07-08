@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home Page{% endblock title %}
+{% block main_content %}
+    <h4 class="text-center">Login Page</h4>
+    <form class="w-25 mx-auto" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+    
+    
+{% endblock main_content %}

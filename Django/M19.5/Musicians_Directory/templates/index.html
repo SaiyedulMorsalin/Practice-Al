@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+  Home Page
+{% endblock %}
+{% block main_content %}
+  <h5 class="text-center">This is Home Page</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Musician Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Album Rating</th>
+        <th scope="col">Instrument Type</th>
+        <th scope="col">Album Name</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for album in data %}
+        <tr>
+          <th scope="row">{{ album.id }}</th>
+          <td>
+            {% if request.user.is_authenticated %}
+              <a class="text-decoration-none" href="{% url 'edit_user' album.musician.id %}">{{ album.musician.first_name }} {{ album.musician.last_name }}</a>
+            {% else %}
+              <a class="nav-link disabled" href="">{{ album.musician.first_name }} {{ album.musician.last_name }}</a>
+            {% endif %}
+          </td>
+          <td>{{ album.musician.email }}</td>
+          <td>{{ album.album_rating }}</td>
+          <td>{{ album.musician.instrument_type }}</td>
+          <td>{{ album.album_name }}</td>
+          <td>06-June-2024</td>
+          <td>
+            {% if request.user.is_authenticated %}
+              <a class="text-decoration-none" href="{% url 'edit_album' album.id %}">Edit</a>
+              <a class="text-decoration-none" href="{% url 'delete_album' album.id %}">Delete</a>
+            {% else %}
+              <div class="d-flex">
+                <a class="nav-link disabled mx-2" href="">Edit</a>
+                <a class="nav-link disabled" href="">Delete</a>
+              </div>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

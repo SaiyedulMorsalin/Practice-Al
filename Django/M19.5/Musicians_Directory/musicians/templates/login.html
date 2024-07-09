@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Musician Page
+{% endblock %}
+{% block main_content %}
+  <h5 class="text-center">This is Login Page</h5>
+  <form action="" method="post" class="w-50 mx-auto">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Login" />
+  </form>
+{% endblock %}

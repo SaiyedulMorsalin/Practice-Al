@@ -1,23 +1,37 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}Home Page{% endblock title %}
+{% block title %}
+  Home Page
+{% endblock %}
 {% block main_content %}
-    <h4 class="text-center">Profile Page</h4>
+  <h4 class="text-center">Profile Page</h4>
 
+  <div class="d-flex">
     {% for post in data %}
-        <div class="card mt-5" style="width: 18rem;">
-          <img src="https://www.blookup.com/static/images/single/profile-1.edaddfbacb02.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{post.content}}</p>
-            <p class="card-text">User: {{post.user.first_name}} {{post.user.last_name}}</p>
-            <p>Category :{% for cat in post.category.all %}
-              <button class="btn btn-primary btn-sm m-2" disabled>{{ cat.name }}</button>
-            {% endfor %}</p>
-            <a href="{%url 'post_edit' post.id %}" class="btn btn-warning">Edit</a>
-            <a href="{%url 'post_delete' post.id %}" class="btn btn-danger">Delete</a>
+      <div class="row">
+        <div class="col-4">
+          <div class="card mt-5 mx-2" style="width: 18rem;">
+            {% if post.image %}
+              <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
+            {% else %}
+              <img src="https://www.blookup.com/static/images/single/profile-1.edaddfbacb02.png" class="card-img-top" alt="..." />
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.content }}</p>
+              <p class="card-text">User: {{ post.user.first_name }} {{ post.user.last_name }}</p>
+              <p>
+                Category :{% for cat in post.category.all %}
+                  <button class="btn btn-primary btn-sm m-2" disabled>{{ cat.name }}</button>
+                {% endfor %}
+              </p>
+              <a href="{% url 'post_edit' post.id %}" class="btn btn-warning">Edit</a>
+              <a href="{% url 'post_delete' post.id %}" class="btn btn-danger">Delete</a>
+            </div>
           </div>
         </div>
-        {% endfor %}
-    
-{% endblock main_content %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

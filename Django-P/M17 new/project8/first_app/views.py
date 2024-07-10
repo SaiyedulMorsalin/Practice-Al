@@ -29,6 +29,7 @@ def signup(request):
             if form.is_valid():
                 form.save()
                 print(form.cleaned_data)
+                return redirect('login_page')
                 
         else:
             form = SignUpForm()

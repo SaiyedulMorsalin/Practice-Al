@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{%load crispy_forms_tags%}
+{% block title %}Home Page{% endblock title %}
+{% block main_content %}
+    <h4 class="text-center">Profile Edit Page</h4>
+    <form class="w-25 mx-auto" method="post">
+        {% csrf_token %}
+        {{form | crispy}}
+        <input type="submit" value="Change Edit">
+    </form>
+    
+    
+{% endblock main_content %}

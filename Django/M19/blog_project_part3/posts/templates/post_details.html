@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Post Details Page
+{% endblock %}
+{% block main_content %}
+  <h4 class="text-center">Post Details Page</h4>
+  <div class="mx-4 d-flex">
+    <div class="card col-6 mt-5 mx-auto">
+      {% if post.image %}
+        <img src="{{ post.image.url }}" class="card-img-top" alt="..." />
+      {% else %}
+        <img src="https://www.blookup.com/static/images/single/profile-1.edaddfbacb02.png" class="card-img-top" alt="..." />
+      {% endif %}
+      <div class="card-body">
+        <h4>Details Here {{ post.title }}</h4>
+
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.content }}</p>
+        <p class="card-text">User: {{ post.user.first_name }} {{ post.user.last_name }}</p>
+        <p>
+          Category :{% for cat in post.category.all %}
+            <button class="btn btn-primary btn-sm m-2" disabled>{{ cat.name }}</button>
+          {% endfor %}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h4>Total Comments: {{ comments|length }}</h4>
+    <div class="card-body border border-primary">
+      {% for comment in comments %}
+        <p>{{ comment.name }}</p>
+        <p>{{ comment.body }}</p>
+        <p>Date: {{ comment.created_on }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="card">
+    {% comment %} <div class="card-body">{{ comment_form }}</div> {% endcomment %}
+    <form method="post" class="w-25 mx-auto">
+      {% csrf_token %}
+      {{ comment_form|crispy }}
+      <input type="submit" value="Post" />
+    </form>
+  </div>
+{% endblock %}

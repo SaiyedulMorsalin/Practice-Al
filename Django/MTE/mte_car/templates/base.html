@@ -14,12 +14,12 @@
     <header>
       <nav class="navbar navbar-expand-lg container rounded-3">
         <div class="container">
-          <a class="navbar-brand" href="#">Rouf Khan Motors</a>
+          <a class="navbar-brand" href="{% url 'home_page' %}">Rouf Khan Motors</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Cars for Sale</a>
@@ -41,14 +41,14 @@
                     <a class="nav-link active" aria-current="page" href="#"><i class="fa-regular fa-user" style="color: #000000;" title="Your Profile"></i></a>
                   </li>
                   <li class="nav-item mx-4">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-right-from-bracket" style="color: #000000;" title="Are you Sure"></i></a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'user_logout' %}"><i class="fa-solid fa-right-from-bracket" style="color: #000000;" title="Are you Sure"></i></a>
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-user-plus" style="color: #000000;" title="Please Register"></i></a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'add_user' %}"><i class="fa-solid fa-user-plus" style="color: #000000;" title="Please Register"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" style="color: #000000;" title="Please Login">Login</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'user_login' %}" style="color: #000000;" title="Please Login">Login</a>
                   </li>
                 {% endif %}
               </ul>

@@ -14,13 +14,13 @@
               <div id="{{ car.car_stock_id }}" class="carousel slide carousel-fade">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img src="https://platform.cstatic-images.com/xlarge/in/v2/ccd1ce32-6d7a-501e-bf9b-8a9eb34dbdc4/aa1f6428-ce5e-452d-b67f-14ee21208a43/k1Tux-C6d1Qapi_D7taSw4Qai74.jpg" class="d-block w-100" alt="Car image 1" />
+                    <img src="{{ car.car_image1.url }}" class="d-block w-100" alt="Car image 1" />
                   </div>
                   <div class="carousel-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo1pkxHCbXl7GiMQK3sGD8oC3H9Xo0YgKKmg&s" class="d-block w-100" alt="Car image 2" />
+                    <img src="{{ car.car_image1.url }}" class="d-block w-100" alt="Car image 2" />
                   </div>
                   <div class="carousel-item">
-                    <img src="https://hyundaisrilanka.lk/images/upload/modal/CARS/Grand-i10.png?tr=w-640,h-331" class="d-block w-100" alt="Car image 3" />
+                    <img src="{{ car.car_image3.url }}" class="d-block w-100" alt="Car image 3" />
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#{{ car.car_stock_id }}" data-bs-slide="prev"><span aria-hidden="true"><i class="fa-solid fa-arrow-left" style="color: #000000;"></i></span></button>
@@ -28,7 +28,7 @@
               </div>
               <div class="card-body mt-1">
                 <h5 class="card-title"><strong>{{ car.car_name|truncatewords:4 }}</strong></h5>
-                <h6>Price: <strong class="text-danger h4">$15000</strong></h6>
+                <h6>Price: <strong class="text-danger h4">${{ car.car_price }}</strong></h6>
                 <h6>Brand: <strong>Tesla</strong></h6>
                 <h6 class="btn btn-small btn-outline-danger disabled"><strong class="text-dark" title="0 miles Odometer">0 Miles</strong></h6>
                 <h6><i class="fa-solid fa-location-dot mx-1" style="color: #000000;"></i> Dhaka</h6>

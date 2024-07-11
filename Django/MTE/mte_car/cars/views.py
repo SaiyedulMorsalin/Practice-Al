@@ -13,15 +13,32 @@ try:
 
     class CarDetail(DetailView):
         model = AddCarModel
+        form_class = CommentForm
         pk_url_kwarg = 'id'
         template_name = 'car_detail.html'
         context_object_name = 'car'
+        def post(self, request, *args, **kwargs):
+            comment_form = CommentForm(data=self.request.POST)
+            car = self.get_object()
+            if comment_form.is_valid():
+                new_comment = comment_form.save(commit=False)
+                new_comment.car = car
+                new_comment.save()
+            return self.get(request, *args, **kwargs)
     
-    def comment(request):
-        form = CommentForm()
-        if form.is_valid():
-            print(form.cleaned_data)
-        return render(request,'new_cars.html',{'form':form})
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            car = self.object # post model er object ekhane store korlam
+            comments = car.comments.all()
+            comment_form = CommentForm()
+            
+            context['comments'] = comments
+            context['comment_form'] = comment_form
+            return context
+        
+        
+    
+    
     
 except Exception as e:
     print(e)

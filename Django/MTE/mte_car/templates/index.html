@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Home Page
+{% endblock %}
+{% block main_content %}
+  <div class="container">
+    <h4 class="text-center mt-5 mb-3"><strong>Browse By Brand</strong></h4>
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner w-25 mx-auto">
+        <div class="carousel-item active">
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Honda</strong></a>
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Toyota</strong></a>
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Tesla</strong></a>
+        </div>
+        <div class="carousel-item">
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Suzuki</strong></a>
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Buick</strong></a>
+          <a href="" class="btn btn-outline-primary text-dark"><strong>BMW</strong></a>
+        </div>
+        <div class="carousel-item">
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Audi</strong></a>
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Aruca</strong></a>
+          <a href="" class="btn btn-outline-primary text-dark"><strong>Dodge</strong></a>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev"><span class="" aria-hidden="true"><i class="fa-solid fa-arrow-left" style="color: #000000;"></i></span></button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next"><span class="" aria-hidden="true"><i class="fa-solid fa-arrow-right" style="color: #000000;"></i></span></button>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+          <div id="carouselExampleFade" class="carousel slide carousel-fade">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://platform.cstatic-images.com/xlarge/in/v2/ccd1ce32-6d7a-501e-bf9b-8a9eb34dbdc4/aa1f6428-ce5e-452d-b67f-14ee21208a43/k1Tux-C6d1Qapi_D7taSw4Qai74.jpg" class="d-block w-100" alt="..." />
+              </div>
+              <div class="carousel-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo1pkxHCbXl7GiMQK3sGD8oC3H9Xo0YgKKmg&s" class="d-block w-100" alt="..." />
+              </div>
+              <div class="carousel-item">
+                <img src="https://hyundaisrilanka.lk/images/upload/modal/CARS/Grand-i10.png?tr=w-640,h-331" class="d-block w-100" alt="..." />
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev"><span class="" aria-hidden="true"><i class="fa-solid fa-arrow-left" style="color: #000000;"></i></span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next"><span class="" aria-hidden="true"><i class="fa-solid fa-arrow-right" style="color: #000000;"></i></span></button>
+          </div>
+          <div class="card-body mt-1">
+            <h5 class="card-title"><strong>Pre-Owned 2022 Toyota Highlander Hybrid LE</strong></h5>
+            <h6>Price: <strong class="text-danger h4">$15000</strong></h6>
+            <h6>Brand: <strong>Tesla</strong></h6>
+            <h6 class="btn btn-small btn-outline-danger disabled"><strong class="text-dark" title="0 miles Odemeter">0 Miles</strong></h6>
+
+            <h6><i class="fa-solid fa-location-dot mx-1" style="color: #000000;"></i> Dhaka</h6>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-outline-secondary text-dark"><strong class="mx-2">More Details</strong><i class="fa-solid fa-arrow-up-right-from-square" style="color: #000000;"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <img src="https://platform.cstatic-images.com/xlarge/in/v2/ccd1ce32-6d7a-501e-bf9b-8a9eb34dbdc4/aa1f6428-ce5e-452d-b67f-14ee21208a43/k1Tux-C6d1Qapi_D7taSw4Qai74.jpg" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -4,5 +4,45 @@
 
 {% endblock %}
 {% block main_content %}
+  <h4 class="text-center">This is Profile Page</h4>
 
+  <main>
+    <div class="container">
+      <div class="row">
+        <h4 class="mb-3"><strong class="mx-2">{{ data|length }} Vehicles</strong></h4>
+        {% for car in data %}
+          <div class="col-md-3 mb-3 d-flex">
+            <div class="card">
+              <div id="{{ car.car_stock_id }}" class="carousel slide carousel-fade">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="" class="d-block w-100" alt="Car image 1" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" class="d-block w-100" alt="Car image 2" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="" class="d-block w-100" alt="Car image 3" />
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#{{ car.car_stock_id }}" data-bs-slide="prev"><span aria-hidden="true"><i class="fa-solid fa-arrow-left" style="color: #000000;"></i></span></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#{{ car.car_stock_id }}" data-bs-slide="next"><span aria-hidden="true"><i class="fa-solid fa-arrow-right" style="color: #000000;"></i></span></button>
+              </div>
+              <div class="card-body mt-1">
+                <h6 class="card-title"><strong>{{ car.car_name|truncatewords:7 }}</strong></h6>
+                <h6>Price: <strong class="text-danger h4">${{ car.car_price }}</strong></h6>
+
+                <div class="d-flex">
+                  <h6 class=""><i class="fa-solid fa-car" style="color: #000000;"></i> <strong>{{ car.car_brand }}</strong></h6>
+                  <h6 class=""><strong class="text-dark" title="0 miles Odometer"><i class="fa-solid fa-gauge" style="color: #000000;"></i> {{ car.car_mileage }}</strong></h6>
+                  <h6 class=""><i class="fa-solid fa-location-dot mx-1" style="color: #000000;"></i> {{ car.car_location }}</h6>
+                  <h6 class=""><i class="fa-solid fa-calendar-days" style="color: #000000;"></i> {{ car.car_year }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
 {% endblock %}

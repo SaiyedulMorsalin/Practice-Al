@@ -5,10 +5,10 @@
   Register Page
 {% endblock %}
 {% block main_content %}
-  <h4 class="text-center">User Login Page</h4>
+  <h4 class="text-center">User Register Page</h4>
   <form method="post" class="w-25 mx-auto">
     {% csrf_token %}
     {{ form|crispy }}
-    <input class="btn btn-outline-primary" type="submit" value="Login" />
+    <input class="btn btn-outline-primary" type="submit" value="Register" />
   </form>
 {% endblock %}

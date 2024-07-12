@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import AddCarModel,CommentModel
+from django.shortcuts import render,get_object_or_404,redirect
+from .models import AddCarModel,CommentModel,UserOrder
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from .forms import CommentForm
@@ -28,7 +28,7 @@ try:
     
         def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
-            car = self.object # post model er object ekhane store korlam
+            car = self.object # addcar  model er object ekhane store korlam
             comments = car.comments.all()
             comment_form = CommentForm()
             
@@ -36,6 +36,19 @@ try:
             context['comment_form'] = comment_form
             return context
         
+        def buy_now(request,car_id):
+            car = get_object_or_404(AddCarModel,id = car_id)
+            if car.car_stock >0:
+                order = UserOrder.objects.create(
+                    user = request.user,
+                    car = car,
+                    quantity = 1,
+                    total_price = car.car_price
+                )
+                car.car_stock -=1
+                car.save()
+                return redirect('order_confirmation',order_id = order.id)
+                
         
     
     

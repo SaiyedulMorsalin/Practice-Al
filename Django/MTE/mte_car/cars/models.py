@@ -13,7 +13,7 @@ class AddCarModel(models.Model):
     ]
     car_type = models.CharField(max_length=5,choices=CAR_TYPE,blank=True,null=True)
     car_price = models.IntegerField()
-    car_stock = models.IntegerField()
+    car_stock = models.IntegerField(blank=True,null=True)
     car_brand = models.ForeignKey(BrandModel,on_delete=models.CASCADE,blank=True,null=True)
     car_make = models.CharField(max_length=100)
     car_model = models.CharField(max_length=100)

@@ -53,19 +53,21 @@
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                       <h4 class="mx-2">Reviews</h4>
                       {% if comments %}
-                        {% for comment in comments %}
-                          <div class="accordion-item">
-                            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Comment by {{ comment.name }}</button></h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                              <div class="accordion-body">
-                                {{ comment.body }}
-                                {% if request.user.is_authenticated %}
-                                  <p>Email: {{ comment.email }}</p>
-                                {% endif %}
+                        <div class="accordion" id="accordionFlushExample">
+                          {% for comment in comments %}
+                            <div class="accordion-item">
+                              <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ comment.id }}" aria-expanded="false" aria-controls="flush-collapse{{ comment.id }}">Comment by {{ comment.name }}</button></h2>
+                              <div id="flush-collapse{{ comment.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                  {{ comment.body }}
+                                  {% if request.user.is_authenticated %}
+                                    <p>Email: {{ comment.email }}</p>
+                                  {% endif %}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        {% endfor %}
+                          {% endfor %}
+                        </div>
                       {% endif %}
                     </div>
                   </div>

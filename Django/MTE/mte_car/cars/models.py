@@ -1,5 +1,5 @@
 from django.db import models
-
+from brands.models import BrandModel
 # Create your models here.
 class AddCarModel(models.Model):
     car_image1 = models.ImageField(upload_to="cars_images/",blank=True,null=True)
@@ -12,7 +12,7 @@ class AddCarModel(models.Model):
     ]
     car_type = models.CharField(max_length=5,choices=CAR_TYPE,blank=True,null=True)
     car_price = models.IntegerField()
-    car_brand = models.CharField(max_length=100)
+    car_brand = models.ForeignKey(BrandModel,on_delete=models.CASCADE,blank=True,null=True)
     car_make = models.CharField(max_length=100)
     car_model = models.CharField(max_length=100)
     car_year = models.IntegerField()

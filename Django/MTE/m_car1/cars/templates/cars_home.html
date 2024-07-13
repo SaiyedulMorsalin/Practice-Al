@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Home Page
+{% endblock %}
+{% block main_content %}
+  <main>
+    <section id="hero-sec" class="mb-5">
+      <div class="container">
+        <div class="hero-img">
+          <img class="w-100" src="{% static '/images/header_sec/header1.png' %}" alt="no_header_image1" />
+        </div>
+        <div class="our-brand-text mt-4">
+          <div class="d-flex justify-content-between mx-auto">
+            <h3>Expolore Our Brands</h3>
+            <a href="{% url 'show_all_cars' %}" class="text-dark text-decoration-none mt-3 d-flex align-items-center"><strong class=""><small class="mx-1">View All Brands</small><i class="fa-solid fa-arrow-up-right-from-square fa-xs" style="color: #000000;"></i></strong></a>
+          </div>
+        </div>
+        <div class="brand-img-links mt-4">
+          <div class="d-flex mx-auto justify-content-evenly" style="width: 90%;">
+            {% for brand in brands %}
+              <div class="border text-center rounded" style="width: 113px; height: 102px;">
+                <a class="text-dark text-decoration-none" href="">
+                  <img src="{{ brand.brand_image.url }}" alt="Please upload this {{ brand.brand_name }} brand  image" />
+                  <h6>{{ brand.brand_name }}</h6>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="cars-sec">
+      <div class="container rounded border" style="background-color: #F9FBFC;">
+        <div class="car-listing-text mt-5">
+          <div class="d-flex justify-content-between mx-auto">
+            <h3>Explore All Vehicles</h3>
+            <a href="{% url 'show_all_cars' %}" class="text-dark text-decoration-none mt-3 d-flex align-items-center"><strong class=""><small class="mx-1">View All</small><i class="fa-solid fa-arrow-up-right-from-square fa-xs" style="color: #000000;"></i></strong></a>
+          </div>
+        </div>
+        <div class="row">
+          {% for car in brand_data %}
+            <div class="col-sm-6 mb-3 mb-sm-0 mb-3 d-flex">
+              <div class="card m-1">
+                <a href="{% url 'car_detail' car.id %}" class="text-decoration-none text-dark"></a>
+                <div id="{{ car.car_stock_id }}" class="carousel slide carousel-fade">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <a href="{% url 'car_detail' car.id %}" class="text-decoration-none text-dark"><img src="{{ car.car_image1.url }}" class="d-block" alt="Car image 1" style="width: 100%;" /></a>
+                    </div>
+                    <div class="carousel-item">
+                      <a href="{% url 'car_detail' car.id %}" class="text-decoration-none text-dark"><img src="{{ car.car_image2.url }}" class="d-block w-100" alt="Car image 2" /></a>
+                    </div>
+                    <div class="carousel-item">
+                      <a href="{% url 'car_detail' car.id %}" class="text-decoration-none text-dark"><img src="{{ car.car_image3.url }}" class="d-block w-100" alt="Car image 3" /></a>
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#{{ car.car_stock_id }}" data-bs-slide="prev"><span aria-hidden="true"><i class="fa-solid fa-arrow-left" style="color: #000000;"></i></span></button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#{{ car.car_stock_id }}" data-bs-slide="next"><span aria-hidden="true"><i class="fa-solid fa-arrow-right" style="color: #000000;"></i></span></button>
+                </div>
+                <div class="card-body">
+                  <a href="{% url 'show_all_cars' %}" class="text-dark text-decoration-none"><strong class=""><h6 class="card-title">{{ car.car_name|truncatewords:5 }}</h6></strong></a>
+
+                  <p class="card-text border-bottom mb-4">{{ car.car_description|truncatewords:12 }}</p>
+                  <div class="d-flex mx-auto justify-content-between border-bottom">
+                    <div class="text-center">
+                      <a href="" class="text-dark text-decoration-none"><strong class=""><i class="fa-solid fa-gauge" style="color: #000000;"></i></strong></a>
+                      <p style="font-size: 14px;">{{ car.car_mileage }}</p>
+                    </div>
+                    <div class="text-center">
+                      <a href="" class="text-dark text-decoration-none"><strong class=""><i class="fa-solid fa-gas-pump" style="color: #000000;"></i></strong></a>
+                      <p style="font-size: 14px;">{{ car.car_fuel_type }}</p>
+                    </div>
+                    <div class="text-center">
+                      <a href="" class="text-dark text-decoration-none"><strong class=""><i class="fa-solid fa-gear" style="color: #000000;"></i></strong></a>
+                      <p style="font-size: 14px;">{{ car.car_drive_type }}</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mx-auto m-2">
+                    <h3>$15,000</h3>
+                    <a href="{% url 'car_detail' car.id %}" class="text-dark text-decoration-none d-flex align-items-center"><strong class=""><small class="mx-1">View Details</small><i class="fa-solid fa-arrow-up-right-from-square fa-xs" style="color: #000000;"></i></strong></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}

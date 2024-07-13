@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth import logout
-from cars.models import AddCarModel
+from cars.models import CarModel
 # Create your views here.
 try:
     class AddUser(CreateView):
@@ -34,12 +34,11 @@ try:
             return super(LogoutView,self).get(request,*args,**kwargs)
         
     def user_profile(request):
-        data = AddCarModel.objects.all()
+        data = CarModel.objects.all()
         user = request.user.username
-        AddCarModel.car_users = user
+        CarModel.car_users = user
         
         print(request.user.username)
-        
         return render(request,'user_profile.html',{'data':data})
 except Exception as e:
     print(e)

@@ -1,18 +1,19 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from .models import AddCarModel,CommentModel,UserOrder
+from .models import CarModel
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from .forms import CommentForm
+from orders.models import UserOrder
 # Create your views here.
 
 try:
     class ShowMore(ListView):
-        model = AddCarModel
+        model = CarModel
         template_name = 'cars.html'
         context_object_name = 'data'
 
     class CarDetail(DetailView):
-        model = AddCarModel
+        model = CarModel
         form_class = CommentForm
         pk_url_kwarg = 'id'
         template_name = 'car_detail.html'
@@ -37,7 +38,7 @@ try:
             return context
         
     def buy_now(request,car_id):
-        car = get_object_or_404(AddCarModel,id = car_id)
+        car = get_object_or_404(CarModel,id = car_id)
         if car.car_stock >0:
             order = UserOrder.objects.create(
                 user = request.user,

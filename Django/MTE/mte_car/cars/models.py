@@ -2,7 +2,7 @@ from django.db import models
 from brands.models import BrandModel
 from django.contrib.auth.models import User
 # Create your models here.
-class AddCarModel(models.Model):
+class CarModel(models.Model):
     car_image1 = models.ImageField(upload_to="cars_images/",blank=True,null=True)
     car_image2 = models.ImageField(upload_to="cars_images/",blank=True,null=True)
     car_image3 = models.ImageField(upload_to="cars_images/",blank=True,null=True)
@@ -36,7 +36,7 @@ class AddCarModel(models.Model):
     def __str__(self):
         return self.car_name
 class CommentModel(models.Model):
-    car = models.ForeignKey(AddCarModel,on_delete=models.CASCADE,related_name='comments')
+    car = models.ForeignKey(CarModel,on_delete=models.CASCADE,related_name='comments')
     name = models.CharField(max_length=100)
     email = models.EmailField()
     body = models.TextField()
@@ -47,13 +47,5 @@ class CommentModel(models.Model):
     
     
 
-class UserOrder(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    car = models.ForeignKey(AddCarModel,on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
-    total_price =models.DecimalField(max_digits=10,decimal_places=2)
-    order_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return f"Order {self.id}"
+
     

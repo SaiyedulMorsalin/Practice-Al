@@ -9,7 +9,19 @@
     <section id="hero-sec" class="mb-5">
       <div class="container">
         <div class="hero-img">
-          <img class="w-100" src="{% static '/images/header_sec/header1.png' %}" alt="no_header_image1" />
+          <div class="card text-white">
+            <img src="{% static '/images/header_sec/head2.png' %}" class="card-img" alt="no_header_image1..." />
+            <div class="card-img-overlay">
+              <p class="mx-5 card-text text-center" style="margin-top: 8%;">
+                <small>Find cars for sale and for rent near you</small>
+              </p>
+              <h4 class="w-75 mx-auto text-center" style="font-size: 65px; font-weight: 600;">Find Your Perfect Car</h4>
+              {% comment %} <h5 class="card-title">Card title</h5> {% endcomment %}
+              <h1 class="mx-5 card-text" style="margin-top: 5%;">{{ count|length }} Vehicles <br /> <strong>Available</strong></h1>
+              <p class="mx-5 card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+          </div>
+          {% comment %} <img class="w-100" src="{% static '/images/header_sec/header1.png' %}" alt="no_header_image1" /> {% endcomment %}
         </div>
         <div class="our-brand-text mt-4">
           <div class="d-flex justify-content-between mx-auto">
@@ -21,7 +33,7 @@
           <div class="d-flex mx-auto justify-content-evenly" style="width: 90%;">
             {% for brand in brands %}
               <div class="border text-center rounded" style="width: 113px; height: 102px;">
-                <a class="text-dark text-decoration-none" href="">
+                <a class="text-dark text-decoration-none" href="{% url 'brand_home' brand.slug %}">
                   <img src="{{ brand.brand_image.url }}" alt="Please upload this {{ brand.brand_name }} brand  image" />
                   <h6>{{ brand.brand_name }}</h6>
                 </a>

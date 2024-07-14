@@ -25,5 +25,6 @@ urlpatterns = [
     path('',include('cars.urls')),
     path('',include('orders.urls')),
     path('',include('users.urls')),
-    path('',views.home_page,name='home_page')
+    path('',views.home_page,name='home_page'),
+    path('brand/<slug:brand_slug>/',views.home_page,name='brand_home'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

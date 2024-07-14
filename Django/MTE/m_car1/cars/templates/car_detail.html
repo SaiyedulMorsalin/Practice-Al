@@ -7,7 +7,7 @@
 {% block main_content %}
   <main>
     <div class="container">
-      <a href=""><img src="{% static '/images/header_sec/header1.png' %}" class="card-img-top rounded-2" alt="header Image 1" /></a>
+      <a href=""><img src="{% static '/images/header_sec/header11.png' %}" class="card-img-top rounded-2" alt="header Image 1" /></a>
     </div>
 
     <div class="container mt-3">
@@ -113,12 +113,14 @@
                         </h6>
                       </div>
                       <div class="card-body text-center">
-                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated and car.car_stock_quantity > 0 %}
                           <a href="{% url 'buy_now' car.id %}" class="btn btn-outline-primary text-dark mx-4"><strong class="mx-2">Buy Now</strong><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
                         {% else %}
-                          <a href="{% url 'buy_now' car.id %}" class="btn btn-outline-primary text-dark mx-4"><strong class="mx-2">Buy Now</strong><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
+                          <a href="{% url 'buy_now' car.id %}" class="btn btn-outline-primary text-dark mx-4 disabled"><strong class="mx-2">Out of Stock</strong><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
                         {% endif %}
-                        <a href="{% url 'buy_now' car.id %}" class="btn btn-outline-primary text-dark mx-4"><strong class="mx-2">Add to Cart</strong><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
+                        {% if request.user.is_authenticated and car.car_stock_quantity > 0 %}
+                          <a href="" class="btn btn-outline-primary text-dark mx-4"><strong class="mx-2">Add to Cart</strong><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
+                        {% endif %}
                       </div>
                       <div class="accordion mx-auto" id="accordionPanelsStayOpenExample" style="width: 90%;">
                         <div class="accordion-item">

@@ -1,8 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import CarModel
-from django.views.generic import DetailView
+from django.views.generic import DetailView,CreateView
 from django.views.generic.list import ListView
-from .forms import CommentForm
+from .forms import CommentForm,AddCarForm
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -11,7 +14,17 @@ try:
         model = CarModel
         template_name = 'car_all_show.html'
         context_object_name = 'data'
-
+        
+        
+    @method_decorator(login_required,name='dispatch')
+    class AddCar(CreateView):
+        model = CarModel
+        form_class = AddCarForm
+        template_name = 'add_car.html'
+        success_url = reverse_lazy('home_page')
+        def form_valid(self, form):
+            form.save()
+            return super().form_valid(form)
     class CarDetail(DetailView):
         model = CarModel
         form_class = CommentForm

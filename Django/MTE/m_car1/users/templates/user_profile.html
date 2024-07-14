@@ -2,6 +2,57 @@
 {% block title %}
   Profile
 {% endblock %}
-{% block main_block %}
-  <h4 class="text-center">This is Profile Page</h4>
+{% block main_content %}
+  <main>
+    <div class="container">
+      <h4 class="text-center">This is Profile Page</h4>
+      <a class="btn btn-outline-danger" href="{% url 'edit_profile' %}">Edit Profile</a>
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="text-dark mb-3">Total {{ data|length }} Owned Cars</h4>
+        <h4 class="text-dark mb-3">Total Price: ${{ total_price }}</h4>
+      </div>
+    </div>
+    <div class="container mt-3">
+      <div class="row">
+        {% for car_item in data %}
+          <div class="col-sm-3 mb-3 mb-sm-0 mb-3 d-flex">
+            <div class="card m-1">
+              <div id="{{ car_item.car.car_stock_id }}" class="carousel slide carousel-fade">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="https://platform.cstatic-images.com/xlarge/in/v2/ccd1ce32-6d7a-501e-bf9b-8a9eb34dbdc4/aa1f6428-ce5e-452d-b67f-14ee21208a43/k1Tux-C6d1Qapi_D7taSw4Qai74.jpg" class="d-block w-100" alt="Car image 1" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo1pkxHCbXl7GiMQK3sGD8oC3H9Xo0YgKKmg&s" class="d-block w-100" alt="Car image 2" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://hyundaisrilanka.lk/images/upload/modal/CARS/Grand-i10.png?tr=w-640,h-331" class="d-block w-100" alt="Car image 3" />
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#{{ car_item.car.car_stock_id }}" data-bs-slide="prev"><span aria-hidden="true"><i class="fa-solid fa-arrow-left" style="color: #000000;"></i></span></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#{{ car_item.car.car_stock_id }}" data-bs-slide="next"><span aria-hidden="true"><i class="fa-solid fa-arrow-right" style="color: #000000;"></i></span></button>
+              </div>
+              <div class="card-body mt-1">
+                <h5 class="card-title"><strong>{{ car_item.car.car_name|truncatewords:4 }}</strong></h5>
+                <div class="d-flex mx-auto justify-content-between border-bottom">
+                  <div class="text-center">
+                    <a href="" class="text-dark text-decoration-none"><strong class=""><i class="fa-solid fa-gauge" style="color: #000000;"></i></strong></a>
+                    <p style="font-size: 14px;">{{ car_item.car.car_mileage }}</p>
+                  </div>
+                  <div class="text-center">
+                    <a href="" class="text-dark text-decoration-none"><strong class=""><i class="fa-solid fa-gas-pump" style="color: #000000;"></i></strong></a>
+                    <p style="font-size: 14px;">{{ car_item.car.car_fuel_type }}</p>
+                  </div>
+                  <div class="text-center">
+                    <a href="" class="text-dark text-decoration-none"><strong class=""><i class="fa-solid fa-gear" style="color: #000000;"></i></strong></a>
+                    <p style="font-size: 14px;">{{ car_item.car.car_drive_type }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
 {% endblock %}

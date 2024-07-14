@@ -10,3 +10,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = CommentModel
         fields = ['name','email','body']
+        
+        
+class AddCarForm(forms.ModelForm):
+    class Meta:
+        model = CarModel
+        fields = '__all__'

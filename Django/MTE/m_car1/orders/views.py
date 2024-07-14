@@ -6,14 +6,14 @@ try:
     pass
     def buy_now(request,car_id):
             car = get_object_or_404(CarModel,id = car_id)
-            if car.car_stock >0:
+            if car.car_stock_quantity >0:
                 order = UserOrder.objects.create(
                     user = request.user,
                     car = car,
                     quantity = 1,
                     total_price = car.car_price
                 )
-                car.car_stock -=1
+                car.car_stock_quantity -=1
                 car.save()
                 return redirect('order_conf',order_id = order.id)
             else:

@@ -21,8 +21,16 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Home</a>
               </li>
+              {% if request.user.is_superuser %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Add Car</a>
+                </li>
+                {% comment %} <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'home_page' %}">Add Car Brand</a>
+                </li> {% endcomment %}
+              {% endif %}
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Cars for Sale</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'show_all_cars' %}">Cars for Sale</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">New</a>
@@ -38,17 +46,17 @@
                     <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-border-all" style="color: #000000;" title="Your Dashboard"></i></a>
                   </li>
                   <li class="nav-item mx-4">
-                    <a class="nav-link active" aria-current="page" href=""><i class="fa-regular fa-user" style="color: #000000;" title="Your Profile"></i></a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'user_profile' %}"><i class="fa-regular fa-user" style="color: #000000;" title="Your Profile"></i></a>
                   </li>
                   <li class="nav-item mx-4">
-                    <a class="nav-link active" aria-current="page" href=""><i class="fa-solid fa-right-from-bracket" style="color: #000000;" title="Are you Sure"></i></a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'user_logout' %}"><i class="fa-solid fa-right-from-bracket" style="color: #000000;" title="Are you Sure"></i></a>
                   </li>
                 {% else %}
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href=""><i class="fa-solid fa-user-plus" style="color: #000000;" title="Please Register"></i></a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'add_user' %}"><i class="fa-solid fa-user-plus" style="color: #000000;" title="Please Register"></i></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="" style="color: #000000;" title="Please Login">Login</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'user_login' %}" style="color: #000000;" title="Please Login">Login</a>
                   </li>
                 {% endif %}
               </ul>

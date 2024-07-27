@@ -56,9 +56,10 @@ class WithdrawMoneyView(TransactionCreateMixin):
     def form_valid(self,form):
         amount = form.cleaned_data.get('amount')
         account = self.request.user.account
-        account.balance +=amount
+        account.balance -=amount
         account.save(
             update_fields = ['balance']
         )
         
         return super().form_valid(form)
+    

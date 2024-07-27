@@ -28,7 +28,7 @@ class DepositForm(TransactionForm):
 
 
 class WithdrawalForm(TransactionForm):
-    def clean_amount(self):
+    def clean_amount(self): # clean diye je fie
         account = self.account
         min_withdraw_balance = 50
         max_withdraw_balance = 25000
@@ -41,7 +41,6 @@ class WithdrawalForm(TransactionForm):
         if amount>balance:
             raise forms.ValidationError(f'You have {balance}$ in you account'
                                         'You can not withdraw more than your account balance')
-        
         return amount
         
 

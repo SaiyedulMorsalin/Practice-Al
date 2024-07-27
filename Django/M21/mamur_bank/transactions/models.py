@@ -12,4 +12,3 @@ class Transactions(models.Model):
     class Meta:
         ordering = ['timestamp']
     
-     

@@ -1,10 +1,14 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
+from django.views.generic import CreateView,ListView
 from .models import Transactions
 from .constants import DEPOSIT,WITHDRAW,LOAN,LOAN_PAID
 from .forms import DepositForm,WithdrawalForm,LoanRequestForm
+from django.http import HttpResponse
+from datetime import datetime
+from django.db import Sum
 # Create your views here.
 
 class TransactionCreateMixin(LoginRequiredMixin,CreateView):
@@ -62,4 +66,47 @@ class WithdrawMoneyView(TransactionCreateMixin):
         )
         
         return super().form_valid(form)
+
+class LoanRequestView(TransactionCreateMixin):
+    form_class = LoanRequestForm
+    title = "Request For Loan"
     
+    def get_initial(self):
+        initial = {'transaction_type':LOAN}
+        return initial
+    
+    def form_valid(self,form):
+        amount = form.cleaned_data.get('amount')
+        loan_request_count = Transactions.objects.filter(account = self.request.user.account,transaction_type = LOAN,loan_approve = True).count()
+        if loan_request_count >=3:
+            return HttpResponse("You have cross the loan limits!!")
+        return super().form_valid(form)
+
+class TransactionReportView(LoginRequiredMixin,ListView):
+    template_name = ""
+    model = Transactions
+    balance = 0
+    
+    def get_queryset(self):
+        
+        queryset = super().get_queryset().filter(
+            account = self.request.user.account,
+        )
+        start_date_str = self.request.GET.get('start_date')
+        end_date_str = self.request.GET.get('end_date')
+        if start_date_str and end_date_str:
+            start_date = datetime.strptime(start_date_str,"%Y-%m-%d").date()
+            end_date = datetime.strptime(end_date_str,"%Y-%m-%d").date()
+            # queryset = queryset.filter(timestamp_date_gte= start_date,timestamp_date_lte = end_date)
+            self.balance = Transactions.objects.filter(timestamp_date_gte= start_date,timestamp_date_lte = end_date).aaggregate(Sum('amount'))['amount__sum']
+        else:
+            self.balance = self.request.user.account.balance
+        
+        return queryset.distinct()
+    
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'account':self.request.user.account
+        })
+        return context

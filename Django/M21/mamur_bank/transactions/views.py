@@ -8,15 +8,15 @@ from .constants import DEPOSIT,WITHDRAW,LOAN,LOAN_PAID
 from .forms import DepositForm,WithdrawalForm,LoanRequestForm
 from django.http import HttpResponse
 from datetime import datetime
-from django.db import Sum
+from django.db.models import Sum
 from django.views import View
 # Create your views here.
 
 class TransactionCreateMixin(LoginRequiredMixin,CreateView):
-    template_name = ''
+    template_name = 'transaction_form.html'
     model = Transactions
     title = ''
-    success_url = reverse_lazy('')
+    success_url = reverse_lazy('transaction_report')
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({
@@ -138,3 +138,6 @@ class LoanListView(LoginRequiredMixin,ListView):
         user_account = self.request.user.account
         queryset = Transactions.objects.filter(account = user_account,transaction_type = LOAN)
         return queryset 
+    
+
+

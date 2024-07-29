@@ -14,8 +14,10 @@
   </head>
   <body class="bg-indigo-600">
     {% include 'navbar.html' %}
-    {% block main_content %}
+    {% block body %}
+      {% block main_content %}
 
+      {% endblock %}
     {% endblock %}
   </body>
 </html>

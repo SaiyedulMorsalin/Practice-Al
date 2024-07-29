@@ -1,21 +1,28 @@
-from typing import Any
+
 from django import forms 
 from .models import Transactions
 
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transactions
-        fields = ['amount','transaction_type']
-    def __init__(self,*args,**kwargs):
-        self.account = kwargs.pop('account')
-        super().__init__(*args,**kwargs)
-        self.fields['transaction_type'].disable = True # ei field disable thakbe
-        self.fields['transaction_type'].widget = forms.HiddenInput #user er kach theke hide kra thakbe...
-    
-    def save(self, commit = True): #chirocena save function
+        fields = ['amount', 'transaction_type']
+
+    def __init__(self, *args, **kwargs):
+        # Get the account from kwargs
+        self.account = kwargs.pop('account', None)
+        super().__init__(*args, **kwargs)
+        # Disable and hide the transaction_type field
+        self.fields['transaction_type'].disabled = True
+        self.fields['transaction_type'].widget = forms.HiddenInput()
+
+    def save(self, commit=True):
+        # Set the account and balance_after_transaction fields before saving
         self.instance.account = self.account
-        self.instance.balance_after_transaction = self.account.balance # 0 -->5000
-        return super().save()
+        self.instance.balance_after_transaction = self.account.balance
+        return super().save(commit=commit)
+
+
+
 
 
 class DepositForm(TransactionForm):

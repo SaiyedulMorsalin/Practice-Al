@@ -12,3 +12,6 @@ class Transactions(models.Model):
     class Meta:
         ordering = ['timestamp']
     
+    def __str__(self):
+        return f"Account No: {self.account.account_no}"
+    

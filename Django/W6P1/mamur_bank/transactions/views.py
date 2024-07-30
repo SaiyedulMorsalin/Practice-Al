@@ -76,8 +76,15 @@ class WithdrawMoneyView(TransactionCreateMixin):
         return initial
 
     def form_valid(self, form):
+
         amount = form.cleaned_data.get("amount")
         user_account = self.request.user.account
+        if user_account.bankrupt == True:
+            messages.success(
+                self.request,
+                f"Now bank is bankrupt , So you can't withdraw money in this situation !! please try later....",
+            )
+            return super().form_invalid(form)
         user_account.balance -= amount
         user_account.save(update_fields=["balance"])
         messages.success(

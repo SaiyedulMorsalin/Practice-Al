@@ -2,24 +2,25 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, FormView
 from .models import Transactions
-from .constants import DEPOSIT, WITHDRAW, LOAN, LOAN_PAID
-from .forms import DepositForm, WithdrawalForm, LoanRequestForm
+from .constants import DEPOSIT, WITHDRAW, LOAN, LOAN_PAID, SEND_MONEY
+from .forms import DepositForm, WithdrawalForm, LoanRequestForm, SendMoneyForm
 from django.http import HttpResponse
 from datetime import datetime
 from django.db.models import Sum
 from django.views import View
 from django.contrib import messages
+from accounts.models import UserBankAccount
 
 # Create your views here.
 
 
 class TransactionCreateMixin(LoginRequiredMixin, CreateView):
-    template_name = "transaction_form.html"
     model = Transactions
     title = ""
-    print("Success Transaction")
+    template_name = "transaction_form.html"
+    # print("Success Transaction")
     success_url = reverse_lazy("transaction_report")
 
     def get_form_kwargs(self):
@@ -81,7 +82,7 @@ class WithdrawMoneyView(TransactionCreateMixin):
         user_account.save(update_fields=["balance"])
         messages.success(
             self.request,
-            f'Successfully withdrawn {"{:,.2f}".format(float(amount))}$ from your account',
+            f'Successfully withdraw {"{:,.2f}".format(float(amount))}$ from your account',
         )
         return super().form_valid(form)
 
@@ -175,3 +176,27 @@ class LoanListView(LoginRequiredMixin, ListView):
             account=user_account, transaction_type=LOAN
         )
         return queryset
+
+
+class SendMoney(FormView):
+    form_class = SendMoneyForm
+    template_name = "send_money.html"
+    success_url = reverse_lazy("transaction_report")
+
+    def form_valid(self, form):
+        sender_account = self.request.user.account
+        receiver_account_no = form.cleaned_data.get("account_no")
+        amount = form.cleaned_data.get("amount")
+        receiver_account = get_object_or_404(
+            UserBankAccount, account_no=receiver_account_no
+        )
+
+        if sender_account.account_no == receiver_account_no:
+            messages.success(self.request, "Can't send money yourself")
+            return super().form_invalid(form)
+        messages.success(self.request, "send money successfully.")
+        sender_account.balance -= amount
+        receiver_account.balance += amount
+        sender_account.save(update_fields=["balance"])
+        receiver_account.save(update_fields=["balance"])
+        return super().form_valid(form)

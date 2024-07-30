@@ -15,6 +15,12 @@
   <body class="bg-indigo-600">
     {% include 'navbar.html' %}
     {% block body %}
+      {% if messages %}
+        {% for m in messages %}
+          <h1 class="font-bold text-3xl text-center pb-5 pt-10 px-5">{{ m }}</h1>
+        {% endfor %}
+      {% endif %}
+
       {% block main_content %}
 
       {% endblock %}

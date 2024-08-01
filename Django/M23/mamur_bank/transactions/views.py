@@ -12,8 +12,18 @@ from django.db.models import Sum
 from django.views import View
 from django.contrib import messages
 from accounts.models import UserBankAccount
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.template.loader import render_to_string
+
+
+def send_transaction_email(user, amount, template, title):
+    msg = render_to_string(
+        template,
+        {"user": user, "amount": amount, "title": title},
+    )
+    send_email = EmailMultiAlternatives(title, "", to=[user.email])
+    send_email.attach_alternative(msg, "text/html")
+    send_email.send()
 
 
 class TransactionCreateMixin(LoginRequiredMixin, CreateView):
@@ -58,6 +68,12 @@ class DepositMoneyView(TransactionCreateMixin):
                 self.request,
                 f'{"{:,.2f}".format(float(amount))}$ was deposited to your account successfully',
             )
+            send_transaction_email(
+                self.request.user,
+                amount,
+                "transaction_email.html",
+                self.title,
+            )
             return super().form_valid(form)
         except Exception as e:
             messages.error(
@@ -92,6 +108,12 @@ class WithdrawMoneyView(TransactionCreateMixin):
             self.request,
             f'Successfully withdraw {"{:,.2f}".format(float(amount))}$ from your account',
         )
+        send_transaction_email(
+            self.request.user,
+            amount,
+            "transaction_email.html",
+            self.title,
+        )
         return super().form_valid(form)
 
 
@@ -117,6 +139,12 @@ class LoanRequestView(TransactionCreateMixin):
         messages.success(
             self.request,
             f'Loan request for {"{:,.2f}".format(float(amount))}$ submitted successfully',
+        )
+        send_transaction_email(
+            self.request.user,
+            amount,
+            "transaction_email.html",
+            self.title,
         )
         return super().form_valid(form)
 
@@ -200,7 +228,7 @@ class SendMoney(FormView):
         )
 
         if sender_account.account_no == receiver_account_no:
-            messages.success(self.request, "Can't send money yourself")
+            messages.error(self.request, "Can't send money yourself")
             return super().form_invalid(form)
         messages.success(self.request, "send money successfully.")
         sender_account.balance -= amount

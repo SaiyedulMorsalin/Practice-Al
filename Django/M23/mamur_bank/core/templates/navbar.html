@@ -2,7 +2,7 @@
 <nav class="flex items-center justify-between flex-wrap bg-white p-6 px-10">
   <div class="flex items-center mr-6">
     <a href=""><img src="{% static 'images/footer/banklogo.svg' %}" alt="Bank Logo" /></a>
-    <div class="border">
+    <div class="">
       <h1 class="font-semibold text-xl tracking-tight text-blue-900 leading-none">
         <a href="/">
           BANGLA BANK
@@ -10,8 +10,6 @@
           <small class="italic font-mono text-sky-600 leading-none">The Bank that values your dreams.</small>
         </a>
       </h1>
-
-      <a href=""></a>
     </div>
   </div>
   <div class="block lg:hidden">
@@ -21,8 +19,7 @@
       </svg>
     </button>
   </div>
-  <!-- Register Login non logged in user er jonne -->
-  <!-- Report , Withdraw, Deposit Profile Logout logged in user -->
+
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto px-10">
     {% if request.user.is_authenticated %}
       <div class="text-md lg:flex-grow">

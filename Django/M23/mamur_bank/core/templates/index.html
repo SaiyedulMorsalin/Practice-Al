@@ -1,8 +1,110 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
   Home Page
 {% endblock %}
 {% block main_content %}
-
+  <main>
+    <div class="w-full mx-auto mt-5 py-5">
+      <section id="how to works" class="bg-sky-900">
+        <div class="container my-5 py-5"></div>
+      </section>
+      <div class="container testimonals my-10 py-5 mx-auto">
+        <div class="testi-box flex" style="height: 490px;">
+          <div class="left-txt" style="width: 40%; border-radius:8px 0px 0px 8px;">
+            <div class="txt p-3">
+              <h1>Testimonals</h1>
+              <h1 class="text-5xl font-semibold" style="letter-spacing: 3px;">What customers say <br /> about us</h1>
+              <p class="mt-5 text-lg font-semibold text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil blanditiis unde illo accusamus inventore adipisci, ipsum aut asperiores voluptatibus quaerat repudiandae? Assumenda facere possimus fugiat? Voluptates accusamus tempora accusantium laborum.</p>
+            </div>
+          </div>
+          {% comment %} <div class="mid-txt p-3" style="width: 25%; background-color: #004E89;">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim maiores ipsam velit ab possimus a expedita sapiente recusandae modi porro vero esse tenetur ratione eius aut optio commodi, beatae saepe!</p>
+          </div> {% endcomment %}
+          <div class="tst-img border flex items-center" style="width: 60%; border-radius:9px 9px 9px 9px; background-color: #004E89;">
+            <div class="mid-txt p-3" style="width: 48%;">
+              <p class="text-lg font-semibold text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim maiores ipsam velit ab possimus a expedita sapiente recusandae modi porro vero esse tenetur ratione eius aut optio commodi, beatae saepe!</p>
+              <h4 class="text-xl font-semibold mt-10 text-green-600">@Saiyedul Morsalin__</h4>
+            </div>
+            <div class="p-3" style="width: 52%; margin-left: 12%;">
+              <img class="" style="height: 100%;" src="{% static 'images/home/peter.png' %}" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="statemnet-box my-10 py-5">
+        <div class="container mx-auto">
+          <div class="box-wrap flex justify-around">
+            <div class="box-content flex items-center">
+              <div class="rounded-full border relative left-8" style="width: 70px; height: 70px; background-color: #FF8500;"></div>
+              <div class="border pl-10 items-center flex rounded-lg shadow-xl shadow-white-500/50" style="width: 280px; height: 120px; ">
+                <div class="">
+                  <h1 class="text-2xl font-semibold" style="letter-spacing: 3px;">19M</h1>
+                  <h3 style="letter-spacing: 2px;">Happy Client</h3>
+                </div>
+              </div>
+            </div>
+            <div class="box-content flex items-center">
+              <div class="rounded-full border relative left-8" style="width: 70px; height: 70px; background-color: #FF8500;"></div>
+              <div class="border pl-10 items-center flex rounded-lg shadow-xl shadow-white-500/50" style="width: 280px; height: 120px; ">
+                <div class="">
+                  <h1 class="text-2xl font-semibold" style="letter-spacing: 3px;">19M</h1>
+                  <h3 style="letter-spacing: 2px;">Total Transactions</h3>
+                </div>
+              </div>
+            </div>
+            <div class="box-content flex items-center">
+              <div class="rounded-full border relative left-8" style="width: 70px; height: 70px; background-color: #FF8500;"></div>
+              <div class="border pl-10 items-center flex rounded-lg shadow-xl shadow-white-500/50" style="width: 280px; height: 120px; ">
+                <div class="">
+                  <h1 class="text-2xl font-semibold" style="letter-spacing: 3px;">19M</h1>
+                  <h3 style="letter-spacing: 2px;">Total Withdraw</h3>
+                </div>
+              </div>
+            </div>
+            <div class="box-content flex items-center">
+              <div class="rounded-full border relative left-8" style="width: 70px; height: 70px; background-color: #FF8500;"></div>
+              <div class="border pl-10 items-center flex rounded-lg shadow-xl shadow-white-500/50" style="width: 280px; height: 120px; ">
+                <div class="">
+                  <h1 class="text-2xl font-semibold" style="letter-spacing: 3px;">19M</h1>
+                  <h3 style="letter-spacing: 2px;">Total Deposit</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="FAQ container mx-auto my-10 py-5">
+        <div class="faq-txt text-center">
+          <h1>Frequently Asked Questions</h1>
+          <p>
+            Deserunt hic consequatur ex placeat! atque repellendus inventore quisquam, <br /> perferendis, eum reiciendis quia nesciunt fuga.
+          </p>
+        </div>
+        <div class="acr w-1/3 mx-auto">
+          <div class="collapse collapse-plus">
+            <input type="checkbox" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title text-xl font-medium">Click to open this one and close others</div>
+            <div class="collapse-content">
+              <p>hello</p>
+            </div>
+          </div>
+          <div class="collapse collapse-plus">
+            <input type="checkbox" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">Click to open this one and close others</div>
+            <div class="collapse-content">
+              <p>hello</p>
+            </div>
+          </div>
+          <div class="collapse collapse-plus">
+            <input type="checkbox" name="my-accordion-3" />
+            <div class="collapse-title text-xl font-medium">Click to open this one and close others</div>
+            <div class="collapse-content">
+              <p>hello</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 {% endblock %}
